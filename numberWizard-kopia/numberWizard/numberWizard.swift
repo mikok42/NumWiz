@@ -1,26 +1,22 @@
 
 import Foundation
 
-class NumberWizard
-{
+class NumberWizard {
     private var min = 0
     
     private var max = 0
     
     var wizGuess = 0
     
-    private func changeMin(newMin: Int)
-    {
+    private func changeMin(newMin: Int) {
         min = newMin
     }
     
-    private func changeMax(newMax: Int)
-    {
+    private func changeMax(newMax: Int) {
         max = newMax
     }
     
-    init(min_: Int, max_: Int)
-    {
+    init(min_: Int, max_: Int) {
         min = min_
         max = max_
         
@@ -30,27 +26,22 @@ class NumberWizard
             """)
     }
     
-    private func nextGuess() -> Int
-    {
+    private func nextGuess() -> Int{
         wizGuess = Int.random(in: min...max)
         return wizGuess
     }
     
-    func printGuess()
-    {
+    func printGuess() {
         print("is your number \(nextGuess()) ?")
         print("type yes or no")
         
     }
     
-    func processAnswer(answer: String)
-    {
-        if(answer == "bigger")
-            {
+    func processAnswer(answer: String) {
+        if(answer == "bigger"){
                 changeMin(newMin: wizGuess)
             }
-        else if(answer == "smaller")
-            {
+        else if(answer == "smaller") {
             changeMax(newMax: wizGuess)
             }
         else {
