@@ -1,27 +1,73 @@
 
 import Foundation
 
-func nextGuess(lowerBound: Int, upperBound: Int) -> Int
+class NumberWizard
 {
-    let guess = Int.random(in: min...max)
-    print("is your number \(guess) ?")
-    print("type yes or no")
+    private var min = 0
     
-    return guess
+    private var max = 0
+    
+    var wizGuess = 0
+    
+    private func changeMin(newMin: Int)
+    {
+        min = newMin
+    }
+    
+    private func changeMax(newMax: Int)
+    {
+        max = newMax
+    }
+    
+    init(min_: Int, max_: Int)
+    {
+        min = min_
+        max = max_
+        
+        print("""
+                welcome to number wizard, think of a number between \(min) and \(max)
+                and i will guess it
+            """)
+    }
+    
+    private func nextGuess() -> Int
+    {
+        wizGuess = Int.random(in: min...max)
+        return wizGuess
+    }
+    
+    func printGuess()
+    {
+        print("is your number \(nextGuess()) ?")
+        print("type yes or no")
+        
+    }
+    
+    func processAnswer(answer: String)
+    {
+        if(answer == "bigger")
+            {
+                changeMin(newMin: wizGuess)
+            }
+        else if(answer == "smaller")
+            {
+            changeMax(newMax: wizGuess)
+            }
+        else {
+            print("i didn't catch that")
+        }
+    }
+    
 }
-
-var min = 0, max = 1000
 
 var stillGuessing = true
 
-print("""
-        welcome to number wizard, think of a number between \(min) and \(max)
-        and i will guess it
-    """)
+let theWizard = NumberWizard(min_: 0, max_: 1000)
 
 while(stillGuessing)
 {
-    let guess = nextGuess(lowerBound: min, upperBound: max)
+   
+    theWizard.printGuess()
     
     var playerInput = readLine()
     
@@ -36,17 +82,10 @@ while(stillGuessing)
         
         playerInput = readLine()
         
-        if(playerInput == "bigger")
-            {
-                min = guess
-            }
-        else if(playerInput == "smaller")
-            {
-                max = guess
-            }
-        else {
-            print("i didn't catch that")
-        }
+        let stringInput = String(playerInput ?? "nothing")
+        
+        theWizard.processAnswer(answer: stringInput)
+     
     }else
     {
         print("i didn't catch that")
